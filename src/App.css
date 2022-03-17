@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
+@import url(https://fonts.googleapis.com/css?family=Poppins);
+body {
+  font-family: "Poppins", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form-input {
+  width: 330px;
+  height: 504px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-input form {
+  padding: 20px;
+}
+
+.form-input form .form-group {
+  margin-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
 }
 
-.App-link {
-  color: #61dafb;
+.form-input form .form-group label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+  padding-left: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-input form .form-group .form-control {
+  margin: 5px 0;
+  padding: 0 10px;
+  width: 95%;
+  height: 44px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #cfd4dc;
+  border-radius: 10px;
 }
+
+.form-input form .form-group button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: start;
+  color: #636c72;
+}
+/*# sourceMappingURL=app.css.map */
