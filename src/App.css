@@ -413,6 +413,13 @@ select {
   font-weight: 100;
 }
 
+.table-content .borde-input {
+  border: solid 1px #295757;
+  border-style: solid none;
+  padding: 20px;
+  text-align: center;
+}
+
 .table-content td {
   border: solid 1px #cfd4dc;
   border-style: solid none;
@@ -467,9 +474,26 @@ select {
 }
 
 .table-content .options-popup .arrive {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 144px;
+  margin: auto;
+  padding: 10px;
   background-color: #295757;
   color: #fff;
   font-weight: 500;
+}
+
+.table-content .options-popup .arrive img {
+  margin: auto;
 }
 
 .table-content .options-popup span {

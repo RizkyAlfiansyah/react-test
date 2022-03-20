@@ -3,6 +3,7 @@ import Form from './Components/Form';
 import CategoryRatio from './Components/CategoryRatio';
 import AvailabilityRatio from './Components/AvailabilityRatio';
 import Table from './Components/Table';
+import { Offline, Online } from "react-detect-offline";
 
 function App() {
   return (

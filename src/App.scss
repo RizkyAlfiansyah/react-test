@@ -7,6 +7,7 @@ $poppins: "Poppins", sans-serif;
 $border_color: #cfd4dc;
 $placeholder_color: #636c72;
 $error_mg: #ff0000;
+$primary_color: #295757;
 
 * {
   margin: 0;
@@ -173,7 +174,7 @@ select {
       outline: none;
       border: none;
       border-radius: 10px;
-      background-color: #295757;
+      background-color: $primary_color;
       color: $white_color;
       font-weight: 500;
       cursor: pointer;
@@ -257,7 +258,7 @@ select {
         border-radius: 5px;
       }
       .available {
-        background-color: #295757;
+        background-color: $primary_color;
       }
       .full {
         background-color: #e74c3c;
@@ -294,6 +295,12 @@ select {
     color: $placeholder_color;
     padding: 10px;
     font-weight: 100;
+  }
+  .borde-input {
+    border: solid 1px $primary_color;
+    border-style: solid none;
+    padding: 20px;
+    text-align: center;
   }
   td {
     border: solid 1px $border_color;
@@ -338,9 +345,18 @@ select {
       cursor: pointer;
     }
     .arrive {
-      background-color: #295757;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 144px;
+      margin: auto;
+      padding: 10px;
+      background-color: $primary_color;
       color: $white_color;
       font-weight: 500;
+      img {
+        margin: auto;
+      }
     }
     span {
       font-size: 14px;

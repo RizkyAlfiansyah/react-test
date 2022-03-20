@@ -2,44 +2,104 @@ import React from 'react'
 import { useEffect } from 'react'
 import * as Service from '../services'
 import { useState } from 'react'
+import vector from '../assets/Vector.png'
 
 function Table() {
   const [data, setData] = useState([])
   const [options, setOptions] = useState(false)
   const [newData, setNewData] = useState([])
+  const [search, setSearch] = useState([])
 
   useEffect(() => {
     Service.getData().then(data => {
       if(data) {
         setData(data.value.hiringTest)
         localStorage.setItem('data', JSON.stringify(data.value.hiringTest))
-      } else {
-        setData([])
-      }
-    })
-      var dataGroup = []
-      data.forEach(item => {
-        dataGroup.push({
-            select : false,
+        var dataGroup = []
+        data.value.hiringTest.forEach(item => {
+          dataGroup.push({
+            select: false,
             name : item.name,
             category : item.category,
             availability : item.availability,
             arrival_status : item.arrival_status,
+            id: item._id
           })
-      })
-    
-      setNewData(dataGroup)
-    }, [])
-
-    console.log(newData)
-
-  const handleInput = (e) => {
-    let ids = []
-    data.forEach(item => {
-      ids.push(item._id)
+        })
+      
+        setNewData(dataGroup)
+      } else {
+        setData([])
+      }
+      
     })
 
-    // console.log(ids)
+  }, [])
+
+  function searchgroup (data) {
+    let search = []
+    data.forEach(item => {
+      if (item.select) {
+        search.push(item)
+      }
+    })
+
+    setSearch(search.length)
+    if (search.length === 0) {
+      setOptions(false)
+    }
+  }
+
+  const onChangeInput = (e) => {
+    setOptions(true)
+    let value = e.target.checked
+    setNewData(newData.map(item => {
+      item.select = value
+      return item
+    }))
+
+    searchgroup(newData)
+  }
+    
+  const onChangeRow = (e , id) => {
+    let value = e.target.checked
+    if (value) {
+      setOptions(true)
+      setNewData(newData.map(item => {
+        if (item.id === id) {
+          item.select = value
+        }
+        return item
+      }))
+    } else {
+      setNewData(newData.map(item => {
+        if (item.id === id) {
+          item.select = value
+        }
+        return item
+      }))
+    }
+    searchgroup(newData)
+    
+  }
+
+  const handleInput = () => {
+  let ids = []
+  newData.forEach(item => {
+    if (item.select) {
+      ids.push(item.id)
+    }
+  })
+
+  ids.map(id => {
+    Service.deleteData(id).then(data => {
+      if (data.m === 'Done') {
+        window.location.reload()
+      }
+    })
+  })
+
+  setOptions(false)
   }
 
   let selectedOption
@@ -47,9 +107,9 @@ function Table() {
     selectedOption = (
       <div className='options-popup'>
         <p className='close-popup' onClick={() => setOptions(false)}>&times;</p>
-        <span>1 Table Selected</span>
-        <button className='arrive' onClick={handleInput}>Mark as Arrived</button>
-        <button>Delete Table</button>
+        <span>{search} Table Selected</span>
+        <button className='arrive'> <img src={vector} /> Mark as Arrived</button>
+        <button onClick={handleInput}>Delete Table</button>
       </div>
     )
   }
@@ -59,7 +119,7 @@ function Table() {
         <table className='table-header'>
             <thead className='table-header-item'>
               <tr>
-                <th><input type='checkbox'></input></th>
+                <th><input type='checkbox' onChange={onChangeInput}></input></th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Availability</th>
@@ -67,10 +127,10 @@ function Table() {
               </tr>
             </thead>
             <tbody>
-            {data.map((item, index) => {
+            {newData.map((item, index) => {
               return (
                 <tr className='table-body-item' key={index}>
-                  <td><input type='checkbox'/></td>
+                  <td><input type='checkbox'checked={item.select} onChange={e => onChangeRow(e, item.id)}/></td>
                   <td>{item.name}</td>
                   <td>{item.category}</td>
                   <td>{item.availability}</td>

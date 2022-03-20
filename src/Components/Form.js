@@ -8,18 +8,14 @@ function Form() {
     const {register,formState: { errors }, handleSubmit} = useForm();
     const [dropDown, setDropDown] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
+    const category = ['Category 1', 'Category 2', 'Category 3', 'Category 4'];
 
-    const data = JSON.parse(localStorage.getItem('data'));
-    let category = [...new Set(data.map(item => item.category))];
-    category = category.sort((a, b) => a > b ? 1 : -1);
-    localStorage.setItem('category', JSON.stringify(category));
+    
 
     const onSubmit = data => {
         const formData = {...data, category: selectedOption};
-        console.log('formData', formData);
         Service.postData(formData).then(data => {
             if(data) {
-                console.log('data', data);
                 window.location.reload();
             }
         });

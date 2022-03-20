@@ -13,10 +13,8 @@ function AvailabilityRatio() {
         const label = JSON.parse(localStorage.getItem('data'))
         setLabel(label.map(item => item.availability))
         const labelsCount = label.map(item => item.availability)
-        console.log(labelsCount)
         let labelsCountUnique = [...new Set(labelsCount)]
         setDataLabels(labelsCountUnique.sort((a, b) => a > b ? 1 : -1))
-        console.log(labelsCountUnique)
         setLabelsUnique(labelsCountUnique.map(item => labelsCount.filter(item2 => item2 === item).length))
     } , [])
 

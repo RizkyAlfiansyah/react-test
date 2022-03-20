@@ -13,12 +13,9 @@ function CategoryRatio() {
         const category = JSON.parse(localStorage.getItem('data'))
         setCategory(category)
         const categoryCount = category.map(item => item.category)
-        // console.log(categoryCount)
         let categoryCountUnique = [...new Set(categoryCount)]
         setDataCategory(categoryCountUnique.sort((a, b) => a > b ? 1 : -1))
-        // console.log(categoryCountUnique)
         setCategoryUnique(categoryCountUnique.map(item => categoryCount.filter(item2 => item2 === item).length))
-        // console.log(categoryCountUniqueCount)
     } , [])
 
     const options = {

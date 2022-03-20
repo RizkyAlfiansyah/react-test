@@ -17,3 +17,12 @@ export const postData = async (dataForm) => {
         console.log(err);
     }
 };
+
+export const deleteData = async (id) => {
+    try{
+        const {data} = await axios.delete(`v1/hiring/${id}`);
+        return data;
+    } catch(err){
+        console.log(err);
+    }
+};
