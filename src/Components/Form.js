@@ -16,8 +16,12 @@ function Form() {
         const formData = {...data, category: selectedOption};
         Service.postData(formData).then(data => {
             if(data) {
+                alert('Data submitted successfully');
                 window.location.reload();
+            } else {
+                alert('Data not submitted');
             }
+           
         });
     };
 

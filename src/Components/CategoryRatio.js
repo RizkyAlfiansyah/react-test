@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import Chart from 'react-apexcharts'
 import { useState } from 'react'
+import * as Service from '../services'
 
-function CategoryRatio() {
+function CategoryRatio(props) {
 
     const [label , setLabel] = useState()
     const [dataCategory , setDataCategory] = useState([]);
@@ -10,12 +11,17 @@ function CategoryRatio() {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
-        const category = JSON.parse(localStorage.getItem('data'))
-        setCategory(category)
-        const categoryCount = category.map(item => item.category)
-        let categoryCountUnique = [...new Set(categoryCount)]
-        setDataCategory(categoryCountUnique.sort((a, b) => a > b ? 1 : -1))
-        setCategoryUnique(categoryCountUnique.map(item => categoryCount.filter(item2 => item2 === item).length))
+        Service.getData().then(data => {
+            if(data) {
+                setCategory(data.value.hiringTest)
+                const categoryCount = data.value.hiringTest.map(item => item.category)
+                let categoryCountUnique = [...new Set(categoryCount)]
+                setDataCategory(categoryCountUnique.sort((a, b) => a > b ? 1 : -1))
+                setCategoryUnique(categoryCountUnique.map(item => categoryCount.filter(item2 => item2 === item).length))
+            } else {
+                setDataCategory([])
+            }
+        })
     } , [])
 
     const options = {

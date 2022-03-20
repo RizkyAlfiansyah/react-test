@@ -1,6 +1,7 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
 import { useEffect, useState } from 'react'
+import * as Service from '../services'
 
 
 function AvailabilityRatio() {
@@ -10,12 +11,17 @@ function AvailabilityRatio() {
     const [labelsUnique, setLabelsUnique] = useState([]);
 
     useEffect(() => {
-        const label = JSON.parse(localStorage.getItem('data'))
-        setLabel(label.map(item => item.availability))
-        const labelsCount = label.map(item => item.availability)
-        let labelsCountUnique = [...new Set(labelsCount)]
-        setDataLabels(labelsCountUnique.sort((a, b) => a > b ? 1 : -1))
-        setLabelsUnique(labelsCountUnique.map(item => labelsCount.filter(item2 => item2 === item).length))
+        Service.getData().then(data => {
+            if(data) {
+                setLabel(data.value.hiringTest)
+                const labelCount = data.value.hiringTest.map(item => item.availability)
+                let labelCountUnique = [...new Set(labelCount)]
+                setDataLabels(labelCountUnique.sort((a, b) => a > b ? 1 : -1))
+                setLabelsUnique(labelCountUnique.map(item => labelCount.filter(item2 => item2 === item).length))
+            } else {
+                setDataLabels([])
+            }
+        })
     } , [])
 
 

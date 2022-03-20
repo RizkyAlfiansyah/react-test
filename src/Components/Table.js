@@ -92,12 +92,14 @@ function Table() {
   })
 
   ids.map(id => {
-    Service.deleteData(id).then(data => {
-      if (data.m === 'Done') {
-        window.location.reload()
-      }
-    })
+    Service.deleteData(id)
   })
+  
+  if (ids.length > 0) {
+    alert('Data deleted successfully')
+    window.location.reload()
+  }
+  console.log(ids.length)
 
   setOptions(false)
   }
